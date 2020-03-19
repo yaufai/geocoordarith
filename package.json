@@ -1,0 +1,17 @@
+{
+  "name": "geocoordarith",
+  "version": "0.0.1",
+  "description": "GeoCoordArith provides arithmetic on geo coordinates. 経緯度に関する計算モジュールです. 这模块提供简单的地理定位算法。",
+  "main": "index.js",
+  "files": [
+    "build/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hara Yuki",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
+}
