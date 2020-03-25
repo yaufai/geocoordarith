@@ -3,27 +3,27 @@ import { DimensionedValue } from "unitconv/build/Dimension"
 import { ANGLE_DEG, ANGLE_RAD } from "unitconv/build/BaseQuantity/Angle"
 
 export class SimpleLocation implements GeoCoordinated {
-    laptitude : DimensionedValue
+    latitude : DimensionedValue
     longtitude: DimensionedValue
     
-    constructor(laptitude: DimensionedValue, longtitude: DimensionedValue) {
-        this.laptitude  = laptitude
+    constructor(latitude: DimensionedValue, longtitude: DimensionedValue) {
+        this.latitude  = latitude
         this.longtitude = longtitude
     }
 
-    getLaptitude(): number {
-        return this.laptitude.getValueIn(ANGLE_DEG)
+    getLatitude(): number {
+        return this.latitude.getValueIn(ANGLE_DEG)
     }
 
-    getLongtitude(): number {
+    getLongitude(): number {
         return this.longtitude.getValueIn(ANGLE_DEG)
     }
 
-    getLaptitudeInRad(): number {
-        return this.laptitude.getValueIn(ANGLE_RAD)
+    getLatitudeInRad(): number {
+        return this.latitude.getValueIn(ANGLE_RAD)
     }
 
-    getLongtitudeInRad(): number {
+    getLongitudeInRad(): number {
         return this.longtitude.getValueIn(ANGLE_RAD)
     }
 }

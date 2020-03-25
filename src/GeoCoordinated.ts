@@ -1,6 +1,6 @@
 export interface GeoCoordinated {
-    getLaptitude : () => number
-    getLongtitude: () => number
-    getLaptitudeInRad : () => number
-    getLongtitudeInRad: () => number
+    getLatitude : () => number
+    getLongitude: () => number
+    getLatitudeInRad : () => number
+    getLongitudeInRad: () => number
 }

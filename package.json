@@ -1,6 +1,6 @@
 {
   "name": "geocoordarith",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "GeoCoordArith provides arithmetic on geo coordinates. 経緯度に関する計算モジュールです. 这模块提供简单的地理定位算法。",
   "main": "index.js",
   "files": [
