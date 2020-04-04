@@ -7,13 +7,14 @@ import { EARTH_RADIUS_DIM } from "./Constants"
 import { instantiateAngle, ANGLE_RAD } from "unitconv/build/BaseQuantity/Angle"
 import { CartesianCoordinate } from "./CartesianCoordinate"
 
-/*
-Represent the given point in Cartesian coordinates, where
-- latitude  : East positive
-- longtitude: North positive
-- the Earth is a perfect sphere
-*/ 
-export function convertToCartesianCoordinate(x: GeoCoordinated, radius: DimensionedValue, unitName?: string): CartesianCoordinate {
+/**
+ * 地球を完全な球体と仮定して、与えられた点のデカルト座標を求める。
+ * Represent in Cartesian coordinates a point on the earth, assuming it is a perfect sphere.
+ * @param x 
+ * @param radius 
+ * @param unitName 
+ */
+function convertToCartesianCoordinate(x: GeoCoordinated, radius: DimensionedValue, unitName?: string): CartesianCoordinate {
     let unit = isNullOrUndefined(unitName) ? LENGTH_KILOMETER : unitName
     let earthRadius = radius.getValueIn(unit)
     return new CartesianCoordinate(
@@ -23,6 +24,12 @@ export function convertToCartesianCoordinate(x: GeoCoordinated, radius: Dimensio
     )
 }
 
+/**
+ * 地球を完全な球体と仮定して、二点の球面上の中点を求める。
+ * Returns the midpoint between x and y on the earth, assuming it is a perfect sphere.
+ * @param x 
+ * @param y 
+ */
 export function getMidpoint(x: GeoCoordinated, y: GeoCoordinated): SimpleLocation {
     let unit   = LENGTH_KILOMETER
     let cart_x = convertToCartesianCoordinate(x, EARTH_RADIUS_DIM, unit)
@@ -34,14 +41,18 @@ export function getMidpoint(x: GeoCoordinated, y: GeoCoordinated): SimpleLocatio
     return new SimpleLocation(instantiateAngle(lat, ANGLE_RAD), instantiateAngle(lng, ANGLE_RAD))
 }
 
-/*
-Returns the distance between x and y on the earth, assuming it is a perfect sphere.
-*/ 
+/**
+ * 地球を完全な球体と仮定して球面上の二点間の距離を計算する。
+ * Returns the distance between x and y on the earth, assuming it is a perfect sphere.
+ * @param x 
+ * @param y 
+ * @param unitName km, m, cm
+ */
 export function getDistance(x: GeoCoordinated, y: GeoCoordinated, unitName?: string): number {
     let unit   = isNullOrUndefined(unitName) ? LENGTH_METER : unitName
-    let sin = Math.sin(x.getLongitudeInRad()) * Math.sin(y.getLongitudeInRad())
-    let cos = Math.cos(x.getLongitudeInRad()) * Math.cos(y.getLongitudeInRad()) * Math.cos(
-        x.getLatitudeInRad() - y.getLatitudeInRad()
+    let sin = Math.sin(x.getLatitudeInRad()) * Math.sin(y.getLatitudeInRad())
+    let cos = Math.cos(x.getLatitudeInRad()) * Math.cos(y.getLatitudeInRad()) * Math.cos(
+        x.getLongitudeInRad() - y.getLongitudeInRad()
     )
     return EARTH_RADIUS_DIM.getValueIn(unit) * Math.acos(cos + sin)
 }
